@@ -1,0 +1,32 @@
+title: Vlad's AI Research Blog
+description: Exploring AI and cognition through research, implementations, and insights
+author: Vladimir Ershov
+email: vladimir.ershov@example.com
+url: "https://Vladimir-Ershov.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Social links
+github_username: Vladimir-Ershov
+linkedin_username: vladimir-ershov-33559466
+
+# Show excerpts on homepage
+show_excerpts: true
+
+# Additional settings
+timezone: Europe/London
+permalink: /:categories/:year/:month/:day/:title/
+
+# Navigation (optional - customize as needed)
+header_pages:
+  - about.md
+  - posts.md
