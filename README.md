@@ -1,6 +1,4 @@
-# [Vlad]'s AI Research Blog
-
-Exploring ai and cognition through research, implementations, and insights
+Exploring AI and cognition through research, implementations, and insights
 
 ## What You'll Find Here
 - 📚 Research paper reviews and summaries
@@ -14,7 +12,6 @@ Exploring ai and cognition through research, implementations, and insights
 
 
 ## Contact
-- Twitter: tbd
 - LinkedIn: [Vladimir Ershov](https://www.linkedin.com/in/vladimir-ershov-33559466/)
 
 ---
