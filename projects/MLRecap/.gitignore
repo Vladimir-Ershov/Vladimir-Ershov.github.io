@@ -1,3 +1,16 @@
+# Custom
+local/
+tmp/
+.vscode/
+
+
+
+# Python artifacts anywhere
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/.ipynb_checkpoints/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
