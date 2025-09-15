@@ -30,3 +30,22 @@ permalink: /:categories/:year/:month/:day/:title/
 header_pages:
   - about.md
   - posts.md
+
+# Collections (optional - for better organization)
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:name/
+
+# Kramdown settings for better code rendering
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# Allow raw HTML and JavaScript in markdown
+kramdown:
+  parse_block_html: true
+  parse_span_html: true
