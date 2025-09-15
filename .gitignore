@@ -3,6 +3,9 @@
 **/tmp/
 **/.vscode/
 **/.pixi/
+vendor/
+_site/
+.bundle/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

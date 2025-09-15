@@ -1,7 +1,6 @@
 title: Vlad's AI Research Blog
 description: Exploring AI and cognition through research, implementations, and insights
 author: Vladimir Ershov
-email: vladimir.ershov@example.com
 url: "https://Vladimir-Ershov.github.io"
 
 # Build settings
@@ -18,6 +17,11 @@ plugins:
 # Social links
 github_username: Vladimir-Ershov
 linkedin_username: vladimir-ershov-33559466
+
+exclude:
+  - projects/MLRecap/.pixi/
+  - .pixi/
+  - projects/MLRecap/
 
 # Show excerpts on homepage
 show_excerpts: true
