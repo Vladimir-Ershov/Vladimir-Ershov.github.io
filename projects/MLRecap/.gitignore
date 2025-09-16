@@ -1,6 +1,7 @@
 # Custom
 local/
 tmp/
+data/
 .vscode/
 
 
