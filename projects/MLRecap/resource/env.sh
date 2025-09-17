@@ -22,3 +22,4 @@ fi
 echo "Pixi installation complete. Pixi is now your default package manager."
 
 pip install rarfile --target .pixi/envs/pytorch/lib/python3.*/site-packages/
+pip install torchviz --target .pixi/envs/pytorch/lib/python3.*/site-packages/
