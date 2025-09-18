@@ -16,7 +16,6 @@ My work focuses on the intersection of AI and human cognition, exploring how we 
 - **AI Cognition & Consciousness**: Exploring the philosophical and practical aspects of artificial intelligence
 - **Robotics & Embodied AI**: Working on challenges like the BEHAVIOR benchmark for household robotics
 - **Language Models**: Understanding and improving LLMs for practical applications
-- **Schema-Guided Reasoning**: Developing structured approaches to AI problem-solving
 
 ## Current Projects
 
@@ -44,7 +43,6 @@ This blog serves as a platform for:
 I believe in:
 
 - **Learning by Building**: The best way to understand something is to build it yourself
-- **Open Science**: Sharing knowledge and code to advance the field together
 - **Practical Theory**: Bridging the gap between theoretical concepts and real-world applications
 - **Accessible AI**: Making complex concepts understandable for everyone
 
@@ -54,15 +52,6 @@ I'm always excited to discuss AI research, collaborate on projects, or just chat
 
 - **GitHub**: [@Vladimir-Ershov](https://github.com/Vladimir-Ershov)
 - **LinkedIn**: [Vladimir Ershov](https://www.linkedin.com/in/vladimir-ershov-33559466/)
-- **Email**: [Contact me](mailto:your-email@example.com) *(Please update with your actual email)*
-
-## Technical Setup
-
-This blog is:
-- Built with Jekyll and hosted on GitHub Pages
-- Features interactive JavaScript demos embedded in posts
-- Supports mathematical notation for technical content
-- Open source - feel free to explore the [repository](https://github.com/Vladimir-Ershov/Vladimir-Ershov.github.io)
 
 ---
 
