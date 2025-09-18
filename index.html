@@ -1,0 +1,246 @@
+---
+layout: home
+title: Vlad's AI Research Blog
+---
+
+<div class="hero-section">
+  <h1 class="site-title">{{ site.title }}</h1>
+  <p class="site-description">{{ site.description }}</p>
+  <div class="hero-links">
+    <a href="{{ '/posts' | relative_url }}" class="btn">All Posts</a>
+    <a href="{{ '/about' | relative_url }}" class="btn">About</a>
+    <a href="{{ '/feed.xml' | relative_url }}" class="btn">RSS</a>
+  </div>
+</div>
+
+<section class="featured-section">
+  <h2>Featured Posts</h2>
+  <div class="featured-posts">
+    {% assign featured = site.posts | where: "featured", true %}
+    {% if featured.size > 0 %}
+      {% for post in featured limit:3 %}
+        <article class="featured-post">
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title | default: "Untitled Post" }}</a></h3>
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
+          <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+          <div class="post-meta">
+            {% if post.categories %}
+              {% for category in post.categories %}
+                <span class="category-tag">{{ category }}</span>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p>No featured posts yet. Check out the latest posts below!</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="recent-posts">
+  <h2>Recent Posts</h2>
+  <div class="post-list">
+    {% for post in site.posts limit:5 %}
+      <article class="post-preview">
+        <header>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title | default: "Untitled Post" }}</a></h3>
+          <div class="post-meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
+            {% assign words = post.content | number_of_words %}
+            <span class="reading-time">
+              {% if words < 360 %}
+                • 1 min read
+              {% else %}
+                • {{ words | divided_by: 180 }} min read
+              {% endif %}
+            </span>
+          </div>
+        </header>
+        <div class="post-excerpt">
+          {{ post.excerpt | strip_html | truncatewords: 50 }}
+        </div>
+        <div class="post-categories">
+          {% if post.categories %}
+            {% for category in post.categories %}
+              <a href="{{ '/posts#' | append: category | relative_url }}" class="category-link">{{ category }}</a>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+
+  {% if site.posts.size > 5 %}
+    <div class="more-posts">
+      <a href="{{ '/posts' | relative_url }}" class="view-all">View all {{ site.posts.size }} posts →</a>
+    </div>
+  {% endif %}
+</section>
+
+<section class="categories-section">
+  <h2>Browse by Category</h2>
+  <div class="category-list">
+    {% assign categories = site.posts | map: 'categories' | uniq | sort %}
+    {% for category in categories %}
+      {% if category %}
+        {% for cat in category %}
+          {% assign cat_posts = site.posts | where_exp: "post", "post.categories contains cat" %}
+          <a href="{{ '/posts#' | append: cat | relative_url }}" class="category-item">
+            <span class="category-name">{{ cat }}</span>
+            <span class="category-count">({{ cat_posts.size }})</span>
+          </a>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    text-align: center;
+    padding: 3rem 0;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #e1e4e8;
+  }
+
+  .site-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #24292e;
+  }
+
+  .site-description {
+    font-size: 1.2rem;
+    color: #586069;
+    margin-bottom: 2rem;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .btn {
+    padding: 0.5rem 1.5rem;
+    background-color: #0366d6;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+  }
+
+  .btn:hover {
+    background-color: #0256c7;
+  }
+
+  .featured-section, .recent-posts, .categories-section {
+    margin-bottom: 3rem;
+  }
+
+  .featured-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .featured-post {
+    padding: 1.5rem;
+    background-color: #f6f8fa;
+    border-radius: 8px;
+    border: 1px solid #e1e4e8;
+  }
+
+  .post-preview {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #e1e4e8;
+  }
+
+  .post-preview:last-child {
+    border-bottom: none;
+  }
+
+  .post-meta {
+    color: #586069;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+  }
+
+  .reading-time {
+    color: #586069;
+  }
+
+  .category-tag, .category-link {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    margin-right: 0.5rem;
+    background-color: #e1e4e8;
+    color: #24292e;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    transition: background-color 0.2s;
+  }
+
+  .category-link:hover, .category-tag:hover {
+    background-color: #d1d5da;
+  }
+
+  .post-categories {
+    margin-top: 1rem;
+  }
+
+  .view-all {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: #0366d6;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .view-all:hover {
+    text-decoration: underline;
+  }
+
+  .category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .category-item {
+    padding: 0.5rem 1rem;
+    background-color: #f6f8fa;
+    color: #24292e;
+    text-decoration: none;
+    border-radius: 20px;
+    border: 1px solid #e1e4e8;
+    transition: all 0.2s;
+  }
+
+  .category-item:hover {
+    background-color: #0366d6;
+    color: white;
+    border-color: #0366d6;
+  }
+
+  .category-count {
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .hero-links {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .featured-posts {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

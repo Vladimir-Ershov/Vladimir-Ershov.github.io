@@ -1,0 +1,291 @@
+---
+layout: default
+permalink: /404.html
+---
+
+<style>
+  .error-container {
+    text-align: center;
+    padding: 5rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .error-code {
+    font-size: 8rem;
+    font-weight: bold;
+    color: #0366d6;
+    margin: 0;
+    line-height: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .error-message {
+    font-size: 2rem;
+    color: #24292e;
+    margin: 1rem 0;
+  }
+
+  .error-description {
+    font-size: 1.1rem;
+    color: #586069;
+    margin: 2rem 0;
+    line-height: 1.6;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 3rem 0;
+  }
+
+  .error-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #0366d6;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+    font-weight: 500;
+  }
+
+  .error-btn:hover {
+    background-color: #0256c7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(3, 102, 214, 0.3);
+  }
+
+  .error-btn-secondary {
+    background-color: white;
+    color: #0366d6;
+    border: 2px solid #0366d6;
+  }
+
+  .error-btn-secondary:hover {
+    background-color: #f6f8fa;
+  }
+
+  .suggestions {
+    margin-top: 4rem;
+    padding: 2rem;
+    background-color: #f6f8fa;
+    border-radius: 8px;
+  }
+
+  .suggestions h3 {
+    color: #24292e;
+    margin-bottom: 1rem;
+  }
+
+  .suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .suggestions-list li {
+    margin: 0.5rem 0;
+  }
+
+  .suggestions-list a {
+    color: #0366d6;
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.25rem 0;
+    transition: all 0.2s;
+  }
+
+  .suggestions-list a:hover {
+    text-decoration: underline;
+    transform: translateX(5px);
+  }
+
+  .search-404 {
+    margin: 2rem 0;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .search-404 input {
+    flex-grow: 1;
+    padding: 0.75rem;
+    border: 2px solid #d1d5da;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+
+  .search-404 input:focus {
+    outline: none;
+    border-color: #0366d6;
+  }
+
+  .search-404 button {
+    padding: 0.75rem 1.5rem;
+    background-color: #0366d6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+
+  .search-404 button:hover {
+    background-color: #0256c7;
+  }
+
+  .recent-posts-404 {
+    margin-top: 3rem;
+  }
+
+  .recent-posts-404 h3 {
+    color: #24292e;
+    margin-bottom: 1rem;
+  }
+
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .post-card {
+    padding: 1rem;
+    background-color: white;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+
+  .post-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .post-card h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+  }
+
+  .post-card h4 a {
+    color: #24292e;
+    text-decoration: none;
+  }
+
+  .post-card h4 a:hover {
+    color: #0366d6;
+  }
+
+  .post-card-meta {
+    color: #586069;
+    font-size: 0.85rem;
+  }
+
+  /* Animation */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .floating-icon {
+    animation: float 3s ease-in-out infinite;
+    display: inline-block;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .error-code {
+      font-size: 5rem;
+    }
+
+    .error-message {
+      font-size: 1.5rem;
+    }
+
+    .error-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .error-btn {
+      width: 200px;
+      text-align: center;
+    }
+  }
+</style>
+
+<div class="error-container">
+  <div class="floating-icon">🔍</div>
+  <h1 class="error-code">404</h1>
+  <h2 class="error-message">Page Not Found</h2>
+  <p class="error-description">
+    Oops! The page you're looking for seems to have wandered off into the digital void.
+    It might have been moved, deleted, or perhaps it never existed in the first place.
+  </p>
+
+  <div class="search-404">
+    <input type="text" id="search-input" placeholder="Search for content..." onkeypress="if(event.key==='Enter') searchSite()">
+    <button onclick="searchSite()">Search</button>
+  </div>
+
+  <div class="error-actions">
+    <a href="{{ '/' | relative_url }}" class="error-btn">Go to Homepage</a>
+    <a href="{{ '/posts' | relative_url }}" class="error-btn error-btn-secondary">Browse All Posts</a>
+    <a href="{{ '/about' | relative_url }}" class="error-btn error-btn-secondary">About</a>
+  </div>
+
+  <div class="suggestions">
+    <h3>Popular Pages</h3>
+    <ul class="suggestions-list">
+      <li>📝 <a href="{{ '/posts' | relative_url }}">All Blog Posts</a></li>
+      <li>👤 <a href="{{ '/about' | relative_url }}">About Me</a></li>
+      <li>📊 <a href="{{ '/' | relative_url }}#categories-section">Browse by Category</a></li>
+      <li>🔗 <a href="https://github.com/Vladimir-Ershov">GitHub Profile</a></li>
+    </ul>
+  </div>
+
+  <div class="recent-posts-404">
+    <h3>Recent Posts</h3>
+    <div class="post-grid">
+      {% for post in site.posts limit:3 %}
+        <div class="post-card">
+          <h4><a href="{{ post.url | relative_url }}">{{ post.title | default: "Untitled Post" }}</a></h4>
+          <div class="post-card-meta">
+            {{ post.date | date: "%B %d, %Y" }}
+            {% if post.categories %}
+              • {{ post.categories | first }}
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  function searchSite() {
+    const searchTerm = document.getElementById('search-input').value;
+    if (searchTerm) {
+      // Redirect to posts page with search term as hash
+      window.location.href = '{{ "/posts" | relative_url }}#search:' + encodeURIComponent(searchTerm);
+    }
+  }
+
+  // Log 404 errors for analytics (if you add analytics later)
+  if (typeof gtag !== 'undefined') {
+    gtag('event', '404', {
+      'page_path': window.location.pathname,
+      'page_referrer': document.referrer
+    });
+  }
+</script>

@@ -1,0 +1,463 @@
+---
+---
+
+/* Dark mode styles */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #24292e;
+  --text-muted: #586069;
+  --border-color: #e1e4e8;
+  --card-bg: #ffffff;
+  --accent-color: #0366d6;
+  --accent-hover: #0256c7;
+  --code-bg: #f6f8fa;
+  --highlight-bg: #fff3cd;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg-color: #0d1117;
+  --text-color: #e6edf3;
+  --text-muted: #8b949e;
+  --border-color: #30363d;
+  --card-bg: #161b22;
+  --accent-color: #58a6ff;
+  --accent-hover: #4493f8;
+  --code-bg: #161b22;
+  --highlight-bg: #3c2e00;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Apply dark mode variables */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-color);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.dark-mode-toggle:hover {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.dark-mode-toggle .toggle-icon {
+  font-size: 16px;
+  transition: transform 0.3s;
+}
+
+.dark-mode-toggle:hover .toggle-icon {
+  transform: rotate(20deg);
+}
+
+/* Update existing styles to use CSS variables */
+.hero-section {
+  border-bottom-color: var(--border-color);
+}
+
+.site-title {
+  color: var(--text-color);
+}
+
+.site-description {
+  color: var(--text-muted);
+}
+
+/* Header/site title styles */
+.site-header .site-title,
+.site-header .site-title:visited,
+h1.site-title,
+.wrapper .site-title {
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .site-header .site-title,
+[data-theme="dark"] .site-header .site-title:visited,
+[data-theme="dark"] h1.site-title,
+[data-theme="dark"] .wrapper .site-title {
+  color: var(--text-color) !important;
+}
+
+.btn {
+  background-color: var(--accent-color);
+  color: white !important;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--accent-hover);
+  color: white !important;
+}
+
+/* Fix RSS and other button text visibility */
+.hero-links .btn,
+.error-btn {
+  color: white !important;
+}
+
+.error-btn-secondary {
+  color: var(--accent-color) !important;
+  background-color: var(--bg-color);
+  border-color: var(--accent-color);
+}
+
+.error-btn-secondary:hover {
+  color: white !important;
+  background-color: var(--accent-color);
+}
+
+.featured-post, .post-preview, .post-item {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.post-meta, .reading-time {
+  color: var(--text-muted);
+}
+
+.category-tag, .category-link, .post-tag {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.category-link:hover, .category-tag:hover {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.view-all, .post-title a {
+  color: var(--accent-color);
+}
+
+.view-all:hover, .post-title a:hover {
+  color: var(--accent-hover);
+}
+
+.category-item {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.category-item:hover {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+/* Archive page styles */
+.filter-controls {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+
+.filter-btn {
+  background-color: var(--bg-color);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.year-title {
+  color: var(--accent-color);
+  border-bottom-color: var(--border-color);
+}
+
+.month-title {
+  color: var(--text-muted);
+}
+
+.post-date {
+  background-color: var(--accent-color);
+}
+
+/* Post layout styles */
+.post-header {
+  border-bottom-color: var(--border-color);
+}
+
+.post-description {
+  background-color: var(--card-bg);
+  color: var(--text-muted);
+  border-left-color: var(--accent-color);
+}
+
+.toc-container, .related-posts, .share-buttons {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.toc-header {
+  border-bottom-color: var(--border-color);
+}
+
+.toc-toggle {
+  color: var(--accent-color);
+}
+
+.toc a {
+  color: var(--text-muted);
+}
+
+.toc a:hover, .toc a.active {
+  color: var(--accent-color);
+}
+
+.post-content pre {
+  background-color: var(--code-bg);
+  border: 1px solid var(--border-color);
+}
+
+.post-content code {
+  background-color: var(--code-bg);
+  color: var(--text-color);
+}
+
+.post-content blockquote {
+  border-left-color: var(--accent-color);
+  color: var(--text-muted);
+}
+
+.post-content h2 {
+  border-bottom-color: var(--border-color);
+}
+
+.share-link {
+  background-color: var(--bg-color);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.share-link:hover {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.post-navigation {
+  border-top-color: var(--border-color);
+}
+
+.prev-post, .next-post {
+  color: var(--text-color);
+}
+
+.prev-post:hover, .next-post:hover {
+  background-color: var(--card-bg);
+}
+
+.nav-title {
+  color: var(--accent-color);
+}
+
+.related-list li {
+  border-bottom-color: var(--border-color);
+}
+
+.related-list a {
+  color: var(--accent-color);
+}
+
+.related-date {
+  color: var(--text-muted);
+}
+
+/* Search page styles */
+#search-input {
+  background-color: var(--bg-color);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+#search-input:focus {
+  border-color: var(--accent-color);
+}
+
+#search-button {
+  background-color: var(--accent-color);
+}
+
+#search-button:hover {
+  background-color: var(--accent-hover);
+}
+
+.search-result {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.result-title a {
+  color: var(--accent-color);
+}
+
+.result-meta {
+  color: var(--text-muted);
+}
+
+.result-excerpt {
+  color: var(--text-muted);
+}
+
+.highlight {
+  background-color: var(--highlight-bg);
+  color: var(--text-color);
+}
+
+.search-suggestions {
+  background-color: var(--card-bg);
+}
+
+.suggestion-tag {
+  background-color: var(--bg-color);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.suggestion-tag:hover {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+/* 404 page styles */
+.error-container {
+  color: var(--text-color);
+}
+
+.error-code {
+  color: var(--accent-color);
+}
+
+.error-message {
+  color: var(--text-color);
+}
+
+.error-description {
+  color: var(--text-muted);
+}
+
+.suggestions {
+  background-color: var(--card-bg);
+}
+
+.suggestions h3 {
+  color: var(--text-color);
+}
+
+.suggestions-list a {
+  color: var(--accent-color);
+}
+
+.search-404 input {
+  background-color: var(--bg-color);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.search-404 input:focus {
+  border-color: var(--accent-color);
+}
+
+.search-404 button {
+  background-color: var(--accent-color);
+}
+
+.search-404 button:hover {
+  background-color: var(--accent-hover);
+}
+
+.post-card {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.post-card h4 a {
+  color: var(--text-color);
+}
+
+.post-card h4 a:hover {
+  color: var(--accent-color);
+}
+
+.post-card-meta {
+  color: var(--text-muted);
+}
+
+/* Additional header and navigation fixes */
+.site-header {
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.site-nav .page-link {
+  color: var(--text-color);
+}
+
+.site-nav .page-link:hover {
+  color: var(--accent-color);
+}
+
+[data-theme="dark"] .site-header {
+  background-color: var(--bg-color);
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .site-nav .page-link {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .site-nav .page-link:hover {
+  color: var(--accent-color);
+}
+
+/* Minima theme specific overrides */
+.wrapper {
+  max-width: calc(800px - (30px * 2));
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+/* Mobile responsiveness for dark mode toggle */
+@media (max-width: 768px) {
+  .dark-mode-toggle {
+    top: 10px;
+    right: 10px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .dark-mode-toggle .toggle-icon {
+    font-size: 14px;
+  }
+}

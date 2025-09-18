@@ -19,7 +19,15 @@ benchmark with 1,000 defined household tasks grounded in real human needs
   Galaxea’s R1 Pro robot, a wheeled humanoid
   no failed grasps, no accidental collisions with the environment, and no jittery, unnatural motions - only smooth and purposeful manipulation behavior
   
+  
 The goal is to complete the task as defined by the BDDL goal conditions (e.g., all the target objects in desired states and locations).
+We focus on task success rate as the primary metric. We count partial success 
+We measure the time taken, the distance the robot traveled, and the total joint movement
+
+We also consider how much training data each submission used. Teams can use as much or as little of the 10k demonstrations (for imitation learning) or the simulator (for RL) as they want, but we record the total frames of experience
+
+November 15th, 2025: Final evaluation
+
 
 ## Baselines
 

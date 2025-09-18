@@ -14,6 +14,11 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
+# Jekyll Feed settings
+feed:
+  posts_limit: 20
+  excerpt_only: false
+
 # Social links
 github_username: Vladimir-Ershov
 linkedin_username: vladimir-ershov-33559466
@@ -33,7 +38,8 @@ permalink: /:categories/:year/:month/:day/:title/
 # Navigation (optional - customize as needed)
 header_pages:
   - about.md
-  - posts.md
+  - posts.html
+  - search.html
 
 # Collections (optional - for better organization)
 collections:
@@ -48,8 +54,6 @@ kramdown:
   syntax_highlighter_opts:
     block:
       line_numbers: false
-
-# Allow raw HTML and JavaScript in markdown
-kramdown:
   parse_block_html: true
   parse_span_html: true
+  hard_wrap: false

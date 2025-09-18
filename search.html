@@ -1,0 +1,470 @@
+---
+layout: page
+title: Search
+permalink: /search/
+---
+
+<div class="search-container">
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Search posts, categories, tags..." autocomplete="off">
+    <button id="search-button">Search</button>
+  </div>
+
+  <div id="search-results" class="search-results">
+    <div id="search-info" class="search-info"></div>
+    <div id="results-container"></div>
+  </div>
+
+  <div id="search-suggestions" class="search-suggestions">
+    <h3>Try searching for:</h3>
+    <div class="suggestion-tags">
+      {% assign all_categories = "" | split: "" %}
+      {% assign all_tags = "" | split: "" %}
+
+      {% for post in site.posts %}
+        {% if post.categories %}
+          {% for category in post.categories %}
+            {% unless all_categories contains category %}
+              {% assign all_categories = all_categories | push: category %}
+            {% endunless %}
+          {% endfor %}
+        {% endif %}
+
+        {% if post.tags %}
+          {% for tag in post.tags %}
+            {% unless all_tags contains tag %}
+              {% assign all_tags = all_tags | push: tag %}
+            {% endunless %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+
+      {% for category in all_categories %}
+        <button class="suggestion-tag" onclick="performSearch('{{ category }}')">{{ category }}</button>
+      {% endfor %}
+
+      {% for tag in all_tags limit:10 %}
+        <button class="suggestion-tag tag-style" onclick="performSearch('{{ tag }}')">#{{ tag }}</button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .search-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .search-box {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #search-input {
+    flex-grow: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--border-color, #d1d5da);
+    border-radius: 8px;
+    transition: border-color 0.3s;
+    background-color: var(--bg-color, white);
+    color: var(--text-color, #24292e);
+  }
+
+  #search-input:focus {
+    outline: none;
+    border-color: var(--accent-color, #0366d6);
+  }
+
+  #search-button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--accent-color, #0366d6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+
+  #search-button:hover {
+    background-color: var(--accent-hover, #0256c7);
+  }
+
+  .search-results {
+    min-height: 200px;
+  }
+
+  .search-info {
+    margin-bottom: 1.5rem;
+    color: var(--text-muted, #586069);
+    font-size: 0.95rem;
+  }
+
+  .search-result {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--card-bg, white);
+    border: 1px solid var(--border-color, #e1e4e8);
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+
+  .search-result:hover {
+    box-shadow: 0 4px 12px var(--shadow, rgba(0, 0, 0, 0.1));
+    transform: translateY(-2px);
+  }
+
+  .result-title {
+    margin: 0 0 0.5rem 0;
+  }
+
+  .result-title a {
+    color: var(--accent-color, #0366d6);
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .result-title a:hover {
+    text-decoration: underline;
+  }
+
+  .result-meta {
+    color: var(--text-muted, #586069);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .result-categories {
+    margin: 0.5rem 0;
+  }
+
+  .result-category, .result-tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    margin-right: 0.5rem;
+    background-color: var(--border-color, #f1f3f4);
+    color: var(--text-color, #24292e);
+    border-radius: 12px;
+    font-size: 0.75rem;
+    text-decoration: none;
+  }
+
+  .result-tag {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  .result-excerpt {
+    color: var(--text-muted, #586069);
+    line-height: 1.5;
+    margin-top: 0.75rem;
+  }
+
+  .highlight {
+    background-color: var(--highlight-bg, #fff3cd);
+    padding: 0.1rem 0.2rem;
+    border-radius: 3px;
+    font-weight: 500;
+    color: var(--text-color, #24292e);
+  }
+
+  .search-suggestions {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: var(--card-bg, #f6f8fa);
+    border-radius: 8px;
+  }
+
+  .search-suggestions h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color, #24292e);
+  }
+
+  .suggestion-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .suggestion-tag {
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-color, white);
+    border: 1px solid var(--border-color, #d1d5da);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+    color: var(--text-color, #24292e);
+  }
+
+  .suggestion-tag:hover {
+    background-color: var(--accent-color, #0366d6);
+    color: white;
+    border-color: var(--accent-color, #0366d6);
+  }
+
+  .suggestion-tag.tag-style {
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+  }
+
+  .suggestion-tag.tag-style:hover {
+    background-color: #856404;
+    border-color: #856404;
+    color: white;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-muted, #586069);
+  }
+
+  .no-results h3 {
+    color: var(--text-color, #24292e);
+    margin-bottom: 1rem;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted, #586069);
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .search-box {
+      flex-direction: column;
+    }
+
+    #search-button {
+      align-self: stretch;
+    }
+
+    .suggestion-tags {
+      justify-content: center;
+    }
+  }
+</style>
+
+<!-- Include Lunr.js from CDN -->
+<script src="https://unpkg.com/lunr@2.3.9/lunr.min.js"></script>
+
+<script>
+  let searchIndex;
+  let searchData = [];
+
+  // Initialize search
+  document.addEventListener('DOMContentLoaded', function() {
+    loadSearchData();
+
+    // Set up event listeners
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+
+    searchInput.addEventListener('input', debounce(function() {
+      if (this.value.length > 2) {
+        performSearch();
+      } else if (this.value.length === 0) {
+        clearResults();
+        showSuggestions();
+      }
+    }, 300));
+
+    searchButton.addEventListener('click', function() {
+      performSearch();
+    });
+
+    // Check for URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('q');
+    if (query) {
+      searchInput.value = query;
+      performSearch();
+    }
+
+    // Check for hash-based search (from 404 page)
+    if (window.location.hash.startsWith('#search:')) {
+      const hashQuery = decodeURIComponent(window.location.hash.substring(8));
+      searchInput.value = hashQuery;
+      performSearch();
+    }
+  });
+
+  function loadSearchData() {
+    const resultsContainer = document.getElementById('results-container');
+    resultsContainer.innerHTML = '<div class="loading">Loading search index...</div>';
+
+    fetch('{{ "/search.json" | relative_url }}')
+      .then(response => response.json())
+      .then(data => {
+        searchData = data;
+
+        // Build Lunr index
+        searchIndex = lunr(function() {
+          this.ref('id');
+          this.field('title', { boost: 10 });
+          this.field('categories', { boost: 5 });
+          this.field('tags', { boost: 3 });
+          this.field('description', { boost: 2 });
+          this.field('content');
+
+          data.forEach(function(doc) {
+            this.add(doc);
+          }, this);
+        });
+
+        clearResults();
+        showSuggestions();
+      })
+      .catch(error => {
+        console.error('Error loading search data:', error);
+        resultsContainer.innerHTML = '<div class="no-results"><h3>Error loading search index</h3><p>Please try refreshing the page.</p></div>';
+      });
+  }
+
+  function performSearch(query) {
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = query || searchInput.value.trim();
+
+    if (query) {
+      searchInput.value = searchTerm;
+    }
+
+    if (!searchTerm || !searchIndex) {
+      return;
+    }
+
+    hideSuggestions();
+
+    // Update URL
+    const url = new URL(window.location);
+    url.searchParams.set('q', searchTerm);
+    history.replaceState(null, '', url);
+
+    try {
+      const results = searchIndex.search(searchTerm + '*');
+      displayResults(results, searchTerm);
+    } catch (error) {
+      // Fallback to simple search if Lunr query fails
+      const simpleResults = searchIndex.search(searchTerm);
+      displayResults(simpleResults, searchTerm);
+    }
+  }
+
+  function displayResults(results, query) {
+    const searchInfo = document.getElementById('search-info');
+    const resultsContainer = document.getElementById('results-container');
+
+    searchInfo.innerHTML = `Found ${results.length} result${results.length !== 1 ? 's' : ''} for "<strong>${escapeHtml(query)}</strong>"`;
+
+    if (results.length === 0) {
+      resultsContainer.innerHTML = `
+        <div class="no-results">
+          <h3>No results found</h3>
+          <p>Try different keywords or browse all posts.</p>
+          <a href="{{ '/posts' | relative_url }}" style="color: var(--accent-color, #0366d6); text-decoration: none;">Browse all posts →</a>
+        </div>
+      `;
+      return;
+    }
+
+    const resultsHtml = results.map(result => {
+      const post = searchData[result.ref];
+      return createResultHtml(post, query);
+    }).join('');
+
+    resultsContainer.innerHTML = resultsHtml;
+  }
+
+  function createResultHtml(post, query) {
+    const highlightedTitle = highlightText(post.title, query);
+    const highlightedExcerpt = highlightText(post.content.substring(0, 200) + '...', query);
+
+    let categoriesHtml = '';
+    if (post.categories && post.categories.length > 0) {
+      categoriesHtml = post.categories.map(cat =>
+        `<a href="{{ '/posts' | relative_url }}#${cat}" class="result-category">${cat}</a>`
+      ).join(' ');
+    }
+
+    let tagsHtml = '';
+    if (post.tags && post.tags.length > 0) {
+      tagsHtml = post.tags.map(tag =>
+        `<span class="result-tag">#${tag}</span>`
+      ).join(' ');
+    }
+
+    return `
+      <div class="search-result">
+        <h3 class="result-title">
+          <a href="${post.url}">${highlightedTitle}</a>
+        </h3>
+        <div class="result-meta">
+          ${post.date}
+          ${post.description ? ` • ${post.description}` : ''}
+        </div>
+        ${categoriesHtml || tagsHtml ? `<div class="result-categories">${categoriesHtml}${tagsHtml}</div>` : ''}
+        <div class="result-excerpt">
+          ${highlightedExcerpt}
+        </div>
+      </div>
+    `;
+  }
+
+  function highlightText(text, query) {
+    if (!query || !text) return escapeHtml(text);
+
+    const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+    return escapeHtml(text).replace(regex, '<span class="highlight">$1</span>');
+  }
+
+  function clearResults() {
+    document.getElementById('search-info').innerHTML = '';
+    document.getElementById('results-container').innerHTML = '';
+  }
+
+  function showSuggestions() {
+    document.getElementById('search-suggestions').style.display = 'block';
+  }
+
+  function hideSuggestions() {
+    document.getElementById('search-suggestions').style.display = 'none';
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func.apply(this, args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+</script>

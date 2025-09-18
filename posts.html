@@ -1,0 +1,350 @@
+---
+layout: page
+title: All Posts
+permalink: /posts/
+---
+
+<div class="archive-header">
+  <h1>All Posts</h1>
+  <p>Browse through all {{ site.posts.size }} posts or filter by category</p>
+</div>
+
+<div class="filter-controls">
+  <button class="filter-btn active" data-filter="all">All Posts</button>
+  {% assign all_categories = "" | split: "" %}
+  {% for post in site.posts %}
+    {% if post.categories %}
+      {% for category in post.categories %}
+        {% unless all_categories contains category %}
+          {% assign all_categories = all_categories | push: category %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  {% assign sorted_categories = all_categories | sort %}
+  {% for category in sorted_categories %}
+    <button class="filter-btn" data-filter="{{ category }}">{{ category | capitalize }}</button>
+  {% endfor %}
+</div>
+
+<div class="posts-archive">
+  {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+  {% for year in posts_by_year %}
+    <section class="year-section" data-year="{{ year.name }}">
+      <h2 class="year-title">{{ year.name }}</h2>
+
+      {% assign posts_by_month = year.items | group_by_exp: "post", "post.date | date: '%B'" %}
+      {% for month in posts_by_month %}
+        <div class="month-section">
+          <h3 class="month-title">{{ month.name }}</h3>
+
+          <ul class="post-list-archive">
+            {% for post in month.items %}
+              <li class="post-item"
+                  {% if post.categories %}
+                    data-categories="{% for cat in post.categories %}{{ cat }} {% endfor %}"
+                  {% else %}
+                    data-categories=""
+                  {% endif %}>
+                <article>
+                  <div class="post-date">
+                    <time datetime="{{ post.date | date_to_xmlschema }}">
+                      {{ post.date | date: "%d" }}
+                    </time>
+                  </div>
+                  <div class="post-content">
+                    <h4 class="post-title">
+                      <a href="{{ post.url | relative_url }}">{{ post.title | default: "Untitled Post" }}</a>
+                    </h4>
+                    <div class="post-meta">
+                      {% if post.categories %}
+                        {% for category in post.categories %}
+                          <span class="category-badge">{{ category }}</span>
+                        {% endfor %}
+                      {% endif %}
+                      {% assign words = post.content | number_of_words %}
+                      <span class="reading-time">
+                        {% if words < 360 %}
+                          1 min read
+                        {% else %}
+                          {{ words | divided_by: 180 }} min read
+                        {% endif %}
+                      </span>
+                    </div>
+                    {% if post.description %}
+                      <p class="post-description">{{ post.description }}</p>
+                    {% else %}
+                      <p class="post-description">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                    {% endif %}
+                  </div>
+                </article>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </section>
+  {% endfor %}
+</div>
+
+<div class="archive-stats">
+  <p>Total posts: <strong id="post-count">{{ site.posts.size }}</strong> |
+     Showing: <strong id="visible-count">{{ site.posts.size }}</strong></p>
+</div>
+
+<style>
+  .archive-header {
+    text-align: center;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border-color, #e1e4e8);
+  }
+
+  .filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: var(--card-bg, #f6f8fa);
+    border-radius: 8px;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-color, white);
+    border: 1px solid var(--border-color, #d1d5da);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+    color: var(--text-color, #24292e);
+  }
+
+  .filter-btn:hover {
+    background-color: var(--accent-color, #0366d6);
+    color: white;
+    border-color: var(--accent-color, #0366d6);
+  }
+
+  .filter-btn.active {
+    background-color: var(--accent-color, #0366d6);
+    color: white;
+    border-color: var(--accent-color, #0366d6);
+  }
+
+  .year-section {
+    margin-bottom: 3rem;
+  }
+
+  .year-title {
+    font-size: 2rem;
+    color: var(--accent-color, #0366d6);
+    border-bottom: 2px solid var(--border-color, #e1e4e8);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .month-section {
+    margin-bottom: 2rem;
+  }
+
+  .month-title {
+    font-size: 1.3rem;
+    color: var(--text-muted, #586069);
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+  }
+
+  .post-list-archive {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-item {
+    display: flex;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: var(--card-bg, white);
+    border: 1px solid var(--border-color, #e1e4e8);
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+
+  .post-item:hover {
+    box-shadow: 0 4px 12px var(--shadow, rgba(0, 0, 0, 0.1));
+    transform: translateY(-2px);
+  }
+
+  .post-item.hidden {
+    display: none;
+  }
+
+  .post-item article {
+    display: flex;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .post-date {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color, #0366d6);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .post-content {
+    flex-grow: 1;
+  }
+
+  .post-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+  }
+
+  .post-title a {
+    color: var(--text-color, #24292e);
+    text-decoration: none;
+  }
+
+  .post-title a:hover {
+    color: var(--accent-color, #0366d6);
+    text-decoration: underline;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background-color: var(--border-color, #e1e4e8);
+    color: var(--text-color, #24292e);
+    border-radius: 3px;
+    font-size: 0.8rem;
+  }
+
+  .reading-time {
+    color: var(--text-muted, #586069);
+    font-size: 0.85rem;
+    padding: 0.2rem 0;
+  }
+
+  .post-description {
+    color: var(--text-muted, #586069);
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .archive-stats {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--card-bg, #f6f8fa);
+    border-radius: 8px;
+    margin-top: 3rem;
+  }
+
+  /* Fade animation */
+  .fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .post-item article {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .post-date {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+
+    .filter-controls {
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const postItems = document.querySelectorAll('.post-item');
+    const visibleCount = document.getElementById('visible-count');
+    const yearSections = document.querySelectorAll('.year-section');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        this.classList.add('active');
+
+        const filter = this.getAttribute('data-filter');
+        let visiblePosts = 0;
+
+        // Filter posts
+        postItems.forEach(post => {
+          const categories = post.getAttribute('data-categories');
+
+          if (filter === 'all') {
+            post.classList.remove('hidden');
+            post.classList.add('fade-in');
+            visiblePosts++;
+          } else if (categories && categories.includes(filter)) {
+            post.classList.remove('hidden');
+            post.classList.add('fade-in');
+            visiblePosts++;
+          } else {
+            post.classList.add('hidden');
+            post.classList.remove('fade-in');
+          }
+        });
+
+        // Hide empty year sections
+        yearSections.forEach(section => {
+          const visiblePostsInYear = section.querySelectorAll('.post-item:not(.hidden)').length;
+          if (visiblePostsInYear === 0) {
+            section.style.display = 'none';
+          } else {
+            section.style.display = 'block';
+          }
+        });
+
+        // Update visible count
+        visibleCount.textContent = visiblePosts;
+      });
+    });
+  });
+</script>
