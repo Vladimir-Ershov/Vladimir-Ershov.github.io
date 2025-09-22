@@ -11,6 +11,8 @@ ipykernel = ">=6.30.1,<7"
 seaborn = ">=0.13.2,<0.14"
 scikit-learn = ">=1.7.1,<2"
 skorch = ">=1.2.0,<2"
+kaggle = ">=1.7.4.5,<2"
+opendatasets = ">=0.1.22,<0.2"
 
 [feature.pytorch]
 channels = ["pytorch", "nvidia", "conda-forge"]
