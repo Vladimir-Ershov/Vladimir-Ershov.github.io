@@ -26,6 +26,9 @@ seaborn = "*"
 scikit-learn = "*"
 pillow = "*"
 psutil = "*"
+pysoundfile = "*"
+libsndfile = "*"
+sox = "*"
 
 # Linux CUDA dependencies
 [feature.pytorch.target.linux-64.dependencies]
@@ -33,6 +36,7 @@ pytorch = { version = "2.5.*", channel = "pytorch", build = "*cuda12.4*" }
 torchvision = { version = "*", channel = "pytorch", build = "*cu124*" }
 torchaudio = { version = "*", channel = "pytorch" }
 pytorch-cuda = "12.4.*"
+ffmpeg = { version = "<7", channel = "conda-forge" }
 
 # macOS CPU dependencies
 [feature.pytorch.target.osx-64.dependencies]
