@@ -13,6 +13,7 @@ scikit-learn = ">=1.7.1,<2"
 skorch = ">=1.2.0,<2"
 kaggle = ">=1.7.4.5,<2"
 opendatasets = ">=0.1.22,<0.2"
+tensorboard = ">=2.20.0,<3"
 
 [feature.pytorch]
 channels = ["pytorch", "nvidia", "conda-forge"]
@@ -29,6 +30,7 @@ psutil = "*"
 pysoundfile = "*"
 libsndfile = "*"
 sox = "*"
+tensorboard = ">=2.20.0,<3"
 
 # Linux CUDA dependencies
 [feature.pytorch.target.linux-64.dependencies]
@@ -46,6 +48,10 @@ torchvision = { version = "*", channel = "pytorch" }
 [feature.pytorch.target.osx-arm64.dependencies]
 pytorch = { version = ">=2.0,<3", channel = "pytorch" }
 torchvision = { version = "*", channel = "pytorch" }
+
+[feature.pytorch.pypi-dependencies]
+opencv-python = ">=4.11.0.86, <5"
+wandb = ">=0.22.1, <0.23"
 
 [environments]
 pytorch = { features = ["pytorch"], no-default-feature = true }
