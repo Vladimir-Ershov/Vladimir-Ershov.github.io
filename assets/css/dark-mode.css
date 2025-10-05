@@ -440,7 +440,7 @@ h1.site-title,
   background: linear-gradient(135deg, var(--palette-ocean) 0%, var(--palette-seafoam) 50%, var(--palette-coral) 100%);
   position: relative;
   overflow: hidden;
-  padding: 2rem 0;
+  padding: 1rem 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
