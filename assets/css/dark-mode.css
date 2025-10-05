@@ -256,7 +256,15 @@ h1.site-title,
 
 .post-content code {
   background-color: var(--code-bg);
-  color: var(--text-color);
+}
+
+/* Preserve syntax highlighting colors in code blocks */
+.post-content pre code {
+  color: inherit;
+}
+
+.post-content pre .highlight * {
+  color: inherit;
 }
 
 .post-content blockquote {
