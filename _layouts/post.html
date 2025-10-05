@@ -192,113 +192,7 @@ layout: default
     border-radius: 4px;
   }
 
-  /* Table of Contents */
-  .toc-container {
-    position: relative;
-    width: 100%;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background-color: #f6f8fa;
-    border-radius: 8px;
-    border: 1px solid #e1e4e8;
-  }
-
-  @media (min-width: 1201px) {
-    .post {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 2rem;
-      max-width: 1200px;
-    }
-
-    .post-header {
-      grid-column: 1 / -1;
-    }
-
-    .toc-container {
-      position: sticky;
-      top: 20px;
-      grid-column: 2;
-      grid-row: 2;
-      width: auto;
-      height: fit-content;
-      max-height: calc(100vh - 100px);
-      overflow-y: auto;
-      margin-bottom: 0;
-    }
-
-    .post-content {
-      grid-column: 1;
-      grid-row: 2;
-    }
-
-    .share-buttons,
-    .post-navigation,
-    .related-posts {
-      grid-column: 1 / -1;
-    }
-  }
-
-  .toc-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #e1e4e8;
-  }
-
-  .toc-header h3 {
-    margin: 0;
-    font-size: 1rem;
-    color: #24292e;
-  }
-
-  .toc-toggle {
-    background: none;
-    border: none;
-    color: #0366d6;
-    cursor: pointer;
-    font-size: 0.85rem;
-    padding: 0.2rem 0.5rem;
-  }
-
-  .toc-toggle:hover {
-    text-decoration: underline;
-  }
-
-  .toc ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-  }
-
-  .toc ul ul {
-    padding-left: 1rem;
-    margin-top: 0.25rem;
-  }
-
-  .toc li {
-    margin-bottom: 0.5rem;
-  }
-
-  .toc a {
-    color: #586069;
-    text-decoration: none;
-    font-size: 0.9rem;
-    display: block;
-    padding: 0.25rem 0;
-    transition: color 0.2s;
-  }
-
-  .toc a:hover {
-    color: #0366d6;
-  }
-
-  .toc a.active {
-    color: #0366d6;
-    font-weight: 500;
-  }
+  /* TOC styles now in global CSS (dark-mode.css) */
 
   /* Post content styling */
   .post-content {
@@ -503,12 +397,6 @@ layout: default
   }
 
   /* Responsive design */
-  @media (max-width: 1200px) {
-    .toc-container {
-      display: none;
-    }
-  }
-
   @media (max-width: 768px) {
     .post-title {
       font-size: 2rem;

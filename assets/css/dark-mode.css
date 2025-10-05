@@ -741,6 +741,135 @@ h1.site-title,
   border-bottom: 2px solid var(--palette-coral);
 }
 
+/* Table of Contents - Fixed Layout (No Overlap) */
+.toc-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  border: 2px solid var(--palette-seafoam);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.toc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.toc-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--palette-ocean);
+  font-weight: 700;
+}
+
+.toc-toggle {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.toc-toggle:hover {
+  background-color: var(--palette-seafoam);
+  color: white;
+}
+
+.toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.toc ul ul {
+  padding-left: 1.25rem;
+  margin-top: 0.5rem;
+  border-left: 2px solid var(--palette-sand);
+}
+
+.toc li {
+  margin-bottom: 0.75rem;
+}
+
+.toc a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  display: block;
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.toc a:hover {
+  color: var(--palette-ocean);
+  background-color: var(--palette-sand);
+  padding-left: 0.75rem;
+}
+
+.toc a.active {
+  color: var(--palette-ocean);
+  font-weight: 600;
+  background-color: var(--palette-sand);
+  border-left: 3px solid var(--palette-coral);
+  padding-left: 0.75rem;
+}
+
+/* Desktop: Two-column grid layout for post with TOC */
+@media (min-width: 1201px) {
+  .post {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2.5rem;
+    max-width: 1200px;
+  }
+
+  .post-header {
+    grid-column: 1 / -1;
+  }
+
+  .toc-container {
+    position: sticky;
+    top: 20px;
+    grid-column: 2;
+    grid-row: 2;
+    width: auto;
+    height: fit-content;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    margin-bottom: 0;
+  }
+
+  .post-content {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .share-buttons,
+  .post-navigation,
+  .related-posts {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Tablet/Mobile: TOC appears as full-width block */
+@media (max-width: 1200px) {
+  .toc-container {
+    width: 100%;
+    position: relative;
+  }
+}
+
 /* Mobile responsiveness for content components */
 @media (max-width: 768px) {
   .pros-cons-grid {
@@ -767,6 +896,18 @@ h1.site-title,
   .table-responsive th {
     font-size: 0.85rem;
   }
+
+  .toc-container {
+    padding: 1rem;
+  }
+
+  .toc-header h3 {
+    font-size: 1rem;
+  }
+
+  .toc a {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -779,5 +920,9 @@ h1.site-title,
   .pros ul, .cons ul {
     padding-left: 20px;
     font-size: 0.9rem;
+  }
+
+  .toc-container {
+    padding: 0.875rem;
   }
 }
