@@ -12,32 +12,117 @@ Neural style transfer combines the content of one image with the artistic style 
 
 ## Quick Comparison Table
 
-| Method | Year | Speed | Quality | GPU Memory | Training Required | Arbitrary Styles |
-|--------|------|-------|---------|------------|-------------------|------------------|
-| **Gatys et al. (Classic)** | 2015 | ⚠️ Slow (2-5 min) | ⭐⭐⭐ Good | Low (2GB) | No | ✅ Yes |
-| **Fast Neural Style** | 2016 | ⚡ Real-time (<0.1s) | ⭐⭐⭐ Good | Low (2GB) | ✅ Per style | ❌ No |
-| **AdaIN** | 2017 | ⚡ Real-time (<0.1s) | ⭐⭐⭐⭐ Great | Medium (4GB) | ✅ Once | ✅ Yes |
-| **PyTorch Hub** | 2019 | ⚡ Fast (0.5s) | ⭐⭐⭐ Good | Low (2GB) | ❌ Pre-trained | ✅ Yes |
-| **StyleGAN-NADA** | 2021 | ⚡ Fast (1s) | ⭐⭐⭐⭐⭐ Excellent | High (8GB) | ✅ Per domain | ✅ Text-guided |
-| **Stable Diffusion** | 2022 | ⏱️ Moderate (5-10s) | ⭐⭐⭐⭐⭐ Excellent | High (8-12GB) | ❌ Pre-trained | ✅ Text-guided |
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Year</th>
+<th>Speed</th>
+<th>Quality</th>
+<th>GPU Memory</th>
+<th>Training Required</th>
+<th>Arbitrary Styles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gatys et al. (Classic)</strong></td>
+<td>2015</td>
+<td>⚠️ Slow (2-5 min)</td>
+<td>⭐⭐⭐ Good</td>
+<td>Low (2GB)</td>
+<td>No</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Fast Neural Style</strong></td>
+<td>2016</td>
+<td>⚡ Real-time (&lt;0.1s)</td>
+<td>⭐⭐⭐ Good</td>
+<td>Low (2GB)</td>
+<td>✅ Per style</td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td><strong>AdaIN</strong></td>
+<td>2017</td>
+<td>⚡ Real-time (&lt;0.1s)</td>
+<td>⭐⭐⭐⭐ Great</td>
+<td>Medium (4GB)</td>
+<td>✅ Once</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>PyTorch Hub</strong></td>
+<td>2019</td>
+<td>⚡ Fast (0.5s)</td>
+<td>⭐⭐⭐ Good</td>
+<td>Low (2GB)</td>
+<td>❌ Pre-trained</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>StyleGAN-NADA</strong></td>
+<td>2021</td>
+<td>⚡ Fast (1s)</td>
+<td>⭐⭐⭐⭐⭐ Excellent</td>
+<td>High (8GB)</td>
+<td>✅ Per domain</td>
+<td>✅ Text-guided</td>
+</tr>
+<tr>
+<td><strong>Stable Diffusion</strong></td>
+<td>2022</td>
+<td>⏱️ Moderate (5-10s)</td>
+<td>⭐⭐⭐⭐⭐ Excellent</td>
+<td>High (8-12GB)</td>
+<td>❌ Pre-trained</td>
+<td>✅ Text-guided</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 ### Pros & Cons Summary
 
-**Classic Gatys Method (My Implementation)**
-- ✅ Simple to understand and implement
-- ✅ Works with any style without training
-- ✅ Low GPU memory requirements
-- ❌ Very slow (optimization per image)
-- ❌ Limited resolution (typically 512×512 max)
-- ❌ No semantic understanding
+<div class="pros-cons-grid">
+<div class="pros">
+<h4>✅ Classic Gatys Method (My Implementation)</h4>
+<ul>
+<li>Simple to understand and implement</li>
+<li>Works with any style without training</li>
+<li>Low GPU memory requirements</li>
+</ul>
+</div>
+<div class="cons">
+<h4>❌ Limitations</h4>
+<ul>
+<li>Very slow (optimization per image)</li>
+<li>Limited resolution (typically 512×512 max)</li>
+<li>No semantic understanding</li>
+</ul>
+</div>
+</div>
 
-**Modern Approaches**
-- ✅ 100-1000× faster
-- ✅ Higher quality results
-- ✅ Better semantic preservation
-- ✅ Some support text prompts
-- ❌ Require more GPU memory
-- ❌ May need training phase
+<div class="pros-cons-grid">
+<div class="pros">
+<h4>✅ Modern Approaches</h4>
+<ul>
+<li>100-1000× faster</li>
+<li>Higher quality results</li>
+<li>Better semantic preservation</li>
+<li>Some support text prompts</li>
+</ul>
+</div>
+<div class="cons">
+<h4>❌ Trade-offs</h4>
+<ul>
+<li>Require more GPU memory</li>
+<li>May need training phase</li>
+</ul>
+</div>
+</div>
 
 ---
 

@@ -194,18 +194,49 @@ layout: default
 
   /* Table of Contents */
   .toc-container {
-    position: sticky;
-    top: 20px;
-    float: right;
-    width: 250px;
-    margin-left: 2rem;
+    position: relative;
+    width: 100%;
     margin-bottom: 2rem;
     padding: 1rem;
     background-color: #f6f8fa;
     border-radius: 8px;
     border: 1px solid #e1e4e8;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
+  }
+
+  @media (min-width: 1201px) {
+    .post {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+      max-width: 1200px;
+    }
+
+    .post-header {
+      grid-column: 1 / -1;
+    }
+
+    .toc-container {
+      position: sticky;
+      top: 20px;
+      grid-column: 2;
+      grid-row: 2;
+      width: auto;
+      height: fit-content;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      margin-bottom: 0;
+    }
+
+    .post-content {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .share-buttons,
+    .post-navigation,
+    .related-posts {
+      grid-column: 1 / -1;
+    }
   }
 
   .toc-header {
