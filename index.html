@@ -3,16 +3,7 @@ layout: home
 title: Vlad's AI Research Blog
 ---
 
-<div class="hero-section">
-  <p class="site-description">{{ site.description }}</p>
-  <div class="hero-links">
-    <a href="{{ '/posts' | relative_url }}" class="btn">All Posts</a>
-    <a href="{{ '/about' | relative_url }}" class="btn">About</a>
-    <a href="{{ '/feed.xml' | relative_url }}" class="btn">RSS</a>
-  </div>
-</div>
-
-<section class="featured-section">
+<!-- <section class="featured-section">
   <h2>Featured Posts</h2>
   <div class="featured-posts">
     {% assign featured = site.posts | where: "featured", true %}
@@ -35,7 +26,7 @@ title: Vlad's AI Research Blog
       <p>No featured posts yet. Check out the latest posts below!</p>
     {% endif %}
   </div>
-</section>
+</section> -->
 
 <section class="recent-posts">
   <h2>Recent Posts</h2>
@@ -96,112 +87,18 @@ title: Vlad's AI Research Blog
 </section>
 
 <style>
-  .hero-section {
-    text-align: center;
-    padding: 4rem 2rem;
-    margin: -2rem -2rem 3rem -2rem;
-    background: linear-gradient(135deg, var(--palette-ocean) 0%, var(--palette-seafoam) 50%, var(--palette-coral) 100%);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-      repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(255, 255, 255, 0.03) 10px,
-        rgba(255, 255, 255, 0.03) 20px
-      );
-    pointer-events: none;
-  }
-
-  .site-description {
-    font-size: 1.5rem;
-    color: white;
-    margin-bottom: 2rem;
-    font-weight: 300;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-links {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  .btn {
-    padding: 0.75rem 2rem;
-    background-color: var(--palette-rust);
-    color: white;
-    text-decoration: none;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    font-weight: 500;
-    border: 2px solid transparent;
-  }
-
-  .btn:hover {
-    background-color: var(--palette-deep-rust);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .featured-section, .recent-posts, .categories-section {
+  .recent-posts, .categories-section {
     margin-bottom: 3rem;
+    margin-top: 3rem;
   }
 
-  .featured-section h2, .recent-posts h2, .categories-section h2 {
+  .recent-posts h2, .categories-section h2 {
     color: var(--palette-ocean);
     border-bottom: 3px solid var(--palette-coral);
     display: inline-block;
     padding-bottom: 0.5rem;
     font-size: 2rem;
     font-weight: 700;
-  }
-
-  .featured-posts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 1.5rem;
-  }
-
-  .featured-post {
-    padding: 2rem;
-    background-color: var(--palette-navy);
-    color: var(--palette-shell);
-    border-radius: 16px;
-    border: 1px solid var(--palette-ocean);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-  }
-
-  .featured-post:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
-    border-color: var(--palette-coral);
-  }
-
-  .featured-post h3 a {
-    color: var(--palette-coral);
-  }
-
-  .featured-post time {
-    color: var(--palette-driftwood);
   }
 
   .post-preview {
@@ -316,22 +213,8 @@ title: Vlad's AI Research Blog
 
   /* Responsive design */
   @media (max-width: 768px) {
-    .hero-section {
-      margin: -1rem -1rem 2rem -1rem;
-      padding: 3rem 1rem;
-    }
-
-    .site-description {
-      font-size: 1.2rem;
-    }
-
-    .hero-links {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .featured-posts {
-      grid-template-columns: 1fr;
+    .recent-posts, .categories-section {
+      margin-top: 2rem;
     }
   }
 </style>

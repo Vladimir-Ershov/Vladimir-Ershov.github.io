@@ -429,31 +429,102 @@ h1.site-title,
   color: var(--text-muted);
 }
 
-/* Additional header and navigation fixes */
+/* Enhanced Header with Gradient Background */
 .site-header {
-  background-color: var(--bg-color);
-  border-bottom: 1px solid var(--border-color);
+  background: transparent;
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.header-gradient {
+  background: linear-gradient(135deg, var(--palette-ocean) 0%, var(--palette-seafoam) 50%, var(--palette-coral) 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.03) 10px,
+    rgba(255, 255, 255, 0.03) 20px
+  );
+  pointer-events: none;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.site-header .site-title,
+.site-header .site-title:visited {
+  color: white !important;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.site-header .site-description {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1rem;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.site-nav {
+  position: relative;
+  z-index: 1;
 }
 
 .site-nav .page-link {
-  color: var(--text-color);
+  color: white !important;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
 .site-nav .page-link:hover {
-  color: var(--accent-color);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white !important;
 }
 
-[data-theme="dark"] .site-header {
-  background-color: var(--bg-color);
-  border-bottom-color: var(--border-color);
+.site-nav .menu-icon > svg path {
+  fill: white;
+}
+
+[data-theme="dark"] .site-header .site-title,
+[data-theme="dark"] .site-header .site-title:visited {
+  color: white !important;
 }
 
 [data-theme="dark"] .site-nav .page-link {
-  color: var(--text-color);
+  color: white !important;
 }
 
 [data-theme="dark"] .site-nav .page-link:hover {
-  color: var(--accent-color);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white !important;
 }
 
 /* Minima theme specific overrides */
@@ -465,8 +536,30 @@ h1.site-title,
   padding-left: 30px;
 }
 
-/* Mobile responsiveness for dark mode toggle */
+/* Mobile responsiveness for header and dark mode toggle */
 @media (max-width: 768px) {
+  .header-gradient {
+    padding: 1.5rem 0;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-header .site-title {
+    font-size: 1.5rem;
+  }
+
+  .site-header .site-description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .site-nav {
+    width: 100%;
+  }
+
   .dark-mode-toggle {
     top: 10px;
     right: 10px;
@@ -476,5 +569,215 @@ h1.site-title,
 
   .dark-mode-toggle .toggle-icon {
     font-size: 14px;
+  }
+}
+
+/* ============================================
+   Reusable Content Components
+   ============================================ */
+
+/* Pros/Cons Grid - Vintage Coastal Theme */
+.pros-cons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.pros, .cons {
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px var(--shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pros::before, .cons::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.pros {
+  background-color: var(--card-bg);
+  border: 2px solid var(--palette-seafoam);
+}
+
+.pros::before {
+  background: linear-gradient(180deg, var(--palette-seafoam) 0%, var(--palette-ocean) 100%);
+}
+
+.pros:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px var(--shadow);
+  border-color: var(--palette-ocean);
+}
+
+.pros:hover::before {
+  width: 12px;
+}
+
+.cons {
+  background-color: var(--card-bg);
+  border: 2px solid var(--palette-coral);
+}
+
+.cons::before {
+  background: linear-gradient(180deg, var(--palette-coral) 0%, var(--palette-rust) 100%);
+}
+
+.cons:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px var(--shadow);
+  border-color: var(--palette-rust);
+}
+
+.cons:hover::before {
+  width: 12px;
+}
+
+.pros h4, .cons h4 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pros h4 {
+  color: var(--palette-ocean);
+}
+
+.cons h4 {
+  color: var(--palette-rust);
+}
+
+.pros ul, .cons ul {
+  margin: 0;
+  padding-left: 24px;
+  line-height: 1.8;
+}
+
+.pros li, .cons li {
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.pros li::marker {
+  color: var(--palette-seafoam);
+}
+
+.cons li::marker {
+  color: var(--palette-coral);
+}
+
+/* Dark theme adjustments for pros/cons */
+[data-theme="dark"] .pros,
+[data-theme="dark"] .cons {
+  background-color: var(--card-bg);
+}
+
+[data-theme="dark"] .pros li,
+[data-theme="dark"] .cons li {
+  color: var(--text-color);
+}
+
+/* Responsive Tables - Vintage Coastal Theme */
+.table-responsive {
+  overflow-x: auto;
+  margin: 32px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px var(--shadow);
+}
+
+.table-responsive table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card-bg);
+}
+
+.table-responsive th,
+.table-responsive td {
+  padding: 16px 20px;
+  text-align: left;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.table-responsive th {
+  background: linear-gradient(135deg, var(--palette-ocean) 0%, var(--palette-seafoam) 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-color: var(--palette-ocean);
+}
+
+.table-responsive tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table-responsive tbody tr:nth-child(even) {
+  background-color: var(--bg-color);
+}
+
+.table-responsive tbody tr:hover {
+  background-color: var(--palette-sand);
+}
+
+[data-theme="dark"] .table-responsive tbody tr:hover {
+  background-color: rgba(127, 169, 155, 0.1);
+}
+
+.table-responsive tbody tr:last-child td {
+  border-bottom: 2px solid var(--palette-coral);
+}
+
+/* Mobile responsiveness for content components */
+@media (max-width: 768px) {
+  .pros-cons-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .pros, .cons {
+    padding: 20px;
+  }
+
+  .table-responsive {
+    margin: 24px 0;
+    border-radius: 8px;
+  }
+
+  .table-responsive th,
+  .table-responsive td {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+
+  .table-responsive th {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-responsive th,
+  .table-responsive td {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .pros ul, .cons ul {
+    padding-left: 20px;
+    font-size: 0.9rem;
   }
 }
