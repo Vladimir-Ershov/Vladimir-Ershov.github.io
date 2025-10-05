@@ -27,6 +27,8 @@ exclude:
   - projects/MLRecap/.pixi/
   - .pixi/
   - projects/MLRecap/
+  - IDEAS.md
+  - CLAUDE.md
 
 # Show excerpts on homepage
 show_excerpts: true
