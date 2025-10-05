@@ -4,7 +4,6 @@ title: Vlad's AI Research Blog
 ---
 
 <div class="hero-section">
-  <h1 class="site-title">{{ site.title }}</h1>
   <p class="site-description">{{ site.description }}</p>
   <div class="hero-links">
     <a href="{{ '/posts' | relative_url }}" class="btn">All Posts</a>
@@ -99,43 +98,66 @@ title: Vlad's AI Research Blog
 <style>
   .hero-section {
     text-align: center;
-    padding: 3rem 0;
-    margin-bottom: 3rem;
-    border-bottom: 2px solid var(--border-color);
+    padding: 4rem 2rem;
+    margin: -2rem -2rem 3rem -2rem;
+    background: linear-gradient(135deg, var(--palette-ocean) 0%, var(--palette-seafoam) 50%, var(--palette-coral) 100%);
+    position: relative;
+    overflow: hidden;
   }
 
-  .site-title {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--text-color);
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.03) 10px,
+        rgba(255, 255, 255, 0.03) 20px
+      );
+    pointer-events: none;
   }
 
   .site-description {
-    font-size: 1.2rem;
-    color: var(--text-muted);
+    font-size: 1.5rem;
+    color: white;
     margin-bottom: 2rem;
+    font-weight: 300;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
   }
 
   .hero-links {
     display: flex;
     gap: 1rem;
     justify-content: center;
+    position: relative;
+    z-index: 1;
   }
 
   .btn {
-    padding: 0.5rem 1.5rem;
-    background-color: var(--accent-color);
+    padding: 0.75rem 2rem;
+    background-color: var(--palette-rust);
     color: white;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 12px;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px var(--shadow);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    border: 2px solid transparent;
   }
 
   .btn:hover {
-    background-color: var(--accent-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--shadow);
+    background-color: var(--palette-deep-rust);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
   }
 
   .featured-section, .recent-posts, .categories-section {
@@ -147,6 +169,8 @@ title: Vlad's AI Research Blog
     border-bottom: 3px solid var(--palette-coral);
     display: inline-block;
     padding-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 700;
   }
 
   .featured-posts {
@@ -157,55 +181,89 @@ title: Vlad's AI Research Blog
   }
 
   .featured-post {
-    padding: 1.5rem;
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 2px 8px var(--shadow);
+    padding: 2rem;
+    background-color: var(--palette-navy);
+    color: var(--palette-shell);
+    border-radius: 16px;
+    border: 1px solid var(--palette-ocean);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
   }
 
   .featured-post:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px var(--shadow);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    border-color: var(--palette-coral);
+  }
+
+  .featured-post h3 a {
+    color: var(--palette-coral);
+  }
+
+  .featured-post time {
+    color: var(--palette-driftwood);
   }
 
   .post-preview {
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--border-color);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--palette-navy);
+    color: var(--palette-shell);
+    border-radius: 16px;
+    border: 1px solid var(--palette-ocean);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  .post-preview:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    border-color: var(--palette-coral);
+  }
+
+  .post-preview h3 a {
+    color: var(--palette-coral);
   }
 
   .post-preview:last-child {
-    border-bottom: none;
+    border-bottom: 1px solid var(--palette-ocean);
   }
 
   .post-meta {
-    color: var(--text-muted);
+    color: var(--palette-driftwood);
     font-size: 0.9rem;
     margin: 0.5rem 0;
   }
 
   .reading-time {
-    color: var(--text-muted);
+    color: var(--palette-driftwood);
+  }
+
+  .post-excerpt {
+    color: var(--palette-shell);
+    opacity: 0.9;
   }
 
   .category-tag, .category-link {
     display: inline-block;
-    padding: 0.2rem 0.6rem;
+    padding: 0.4rem 0.9rem;
     margin-right: 0.5rem;
     background-color: var(--palette-sand);
     color: var(--palette-warm-gray);
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 12px;
     font-size: 0.85rem;
     transition: all 0.2s ease;
     border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .category-link:hover, .category-tag:hover {
     background-color: var(--palette-seafoam);
     color: white;
     border-color: var(--palette-seafoam);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
   .post-categories {
@@ -233,22 +291,22 @@ title: Vlad's AI Research Blog
   }
 
   .category-item {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     background-color: var(--card-bg);
     color: var(--text-color);
     text-decoration: none;
-    border-radius: 20px;
+    border-radius: 24px;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px var(--shadow);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
   }
 
   .category-item:hover {
     background-color: var(--accent-color);
     color: white;
     border-color: var(--accent-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px var(--shadow);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
 
   .category-count {
@@ -258,6 +316,15 @@ title: Vlad's AI Research Blog
 
   /* Responsive design */
   @media (max-width: 768px) {
+    .hero-section {
+      margin: -1rem -1rem 2rem -1rem;
+      padding: 3rem 1rem;
+    }
+
+    .site-description {
+      font-size: 1.2rem;
+    }
+
     .hero-links {
       flex-direction: column;
       align-items: center;
