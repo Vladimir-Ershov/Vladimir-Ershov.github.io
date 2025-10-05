@@ -101,18 +101,18 @@ title: Vlad's AI Research Blog
     text-align: center;
     padding: 3rem 0;
     margin-bottom: 3rem;
-    border-bottom: 1px solid #e1e4e8;
+    border-bottom: 2px solid var(--border-color);
   }
 
   .site-title {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #24292e;
+    color: var(--text-color);
   }
 
   .site-description {
     font-size: 1.2rem;
-    color: #586069;
+    color: var(--text-muted);
     margin-bottom: 2rem;
   }
 
@@ -124,19 +124,29 @@ title: Vlad's AI Research Blog
 
   .btn {
     padding: 0.5rem 1.5rem;
-    background-color: #0366d6;
+    background-color: var(--accent-color);
     color: white;
     text-decoration: none;
     border-radius: 6px;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px var(--shadow);
   }
 
   .btn:hover {
-    background-color: #0256c7;
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow);
   }
 
   .featured-section, .recent-posts, .categories-section {
     margin-bottom: 3rem;
+  }
+
+  .featured-section h2, .recent-posts h2, .categories-section h2 {
+    color: var(--palette-ocean);
+    border-bottom: 3px solid var(--palette-coral);
+    display: inline-block;
+    padding-bottom: 0.5rem;
   }
 
   .featured-posts {
@@ -148,14 +158,21 @@ title: Vlad's AI Research Blog
 
   .featured-post {
     padding: 1.5rem;
-    background-color: #f6f8fa;
+    background-color: var(--card-bg);
     border-radius: 8px;
-    border: 1px solid #e1e4e8;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: all 0.3s ease;
+  }
+
+  .featured-post:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px var(--shadow);
   }
 
   .post-preview {
     padding: 1.5rem 0;
-    border-bottom: 1px solid #e1e4e8;
+    border-bottom: 1px solid var(--border-color);
   }
 
   .post-preview:last-child {
@@ -163,29 +180,32 @@ title: Vlad's AI Research Blog
   }
 
   .post-meta {
-    color: #586069;
+    color: var(--text-muted);
     font-size: 0.9rem;
     margin: 0.5rem 0;
   }
 
   .reading-time {
-    color: #586069;
+    color: var(--text-muted);
   }
 
   .category-tag, .category-link {
     display: inline-block;
     padding: 0.2rem 0.6rem;
     margin-right: 0.5rem;
-    background-color: #e1e4e8;
-    color: #24292e;
+    background-color: var(--palette-sand);
+    color: var(--palette-warm-gray);
     text-decoration: none;
-    border-radius: 3px;
+    border-radius: 4px;
     font-size: 0.85rem;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border-color);
   }
 
   .category-link:hover, .category-tag:hover {
-    background-color: #d1d5da;
+    background-color: var(--palette-seafoam);
+    color: white;
+    border-color: var(--palette-seafoam);
   }
 
   .post-categories {
@@ -195,12 +215,13 @@ title: Vlad's AI Research Blog
   .view-all {
     display: inline-block;
     margin-top: 1.5rem;
-    color: #0366d6;
+    color: var(--accent-color);
     text-decoration: none;
     font-weight: 500;
   }
 
   .view-all:hover {
+    color: var(--accent-hover);
     text-decoration: underline;
   }
 
@@ -213,18 +234,21 @@ title: Vlad's AI Research Blog
 
   .category-item {
     padding: 0.5rem 1rem;
-    background-color: #f6f8fa;
-    color: #24292e;
+    background-color: var(--card-bg);
+    color: var(--text-color);
     text-decoration: none;
     border-radius: 20px;
-    border: 1px solid #e1e4e8;
-    transition: all 0.2s;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px var(--shadow);
   }
 
   .category-item:hover {
-    background-color: #0366d6;
+    background-color: var(--accent-color);
     color: white;
-    border-color: #0366d6;
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow);
   }
 
   .category-count {

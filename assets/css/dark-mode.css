@@ -1,31 +1,48 @@
 ---
 ---
 
-/* Dark mode styles */
+/*
+ * Vintage Summer / Rusty Retro Coastal Color Palette
+ * Inspired by faded beach postcards, weathered wood, and sunset sands
+ */
 :root {
-  --bg-color: #ffffff;
-  --text-color: #24292e;
-  --text-muted: #586069;
-  --border-color: #e1e4e8;
-  --card-bg: #ffffff;
-  --accent-color: #0366d6;
-  --accent-hover: #0256c7;
-  --code-bg: #f6f8fa;
-  --highlight-bg: #fff3cd;
-  --shadow: rgba(0, 0, 0, 0.1);
+  /* Palette - Vintage Summer / Rusty Retro Coastal */
+  --palette-rust: #C65D3B;           /* Weathered terracotta / rusty orange */
+  --palette-coral: #E8927C;          /* Faded coral / warm sand */
+  --palette-sand: #F4E4C1;           /* Vintage sand / warm beige */
+  --palette-seafoam: #7FA99B;        /* Faded seafoam green / vintage teal */
+  --palette-ocean: #517B8E;          /* Dusty ocean blue / coastal blue */
+  --palette-driftwood: #8B7E74;      /* Weathered driftwood / taupe */
+  --palette-shell: #F9F3E9;          /* Seashell cream / off-white */
+  --palette-deep-rust: #A84A2E;      /* Deep rust / burnt sienna */
+  --palette-navy: #364958;           /* Faded navy / deep coastal blue */
+  --palette-warm-gray: #5A5353;      /* Warm charcoal / vintage text */
+
+  /* Light theme - using vintage coastal palette */
+  --bg-color: var(--palette-shell);
+  --text-color: var(--palette-warm-gray);
+  --text-muted: var(--palette-driftwood);
+  --border-color: #E5D5C3;
+  --card-bg: #FFFBF5;
+  --accent-color: var(--palette-rust);
+  --accent-hover: var(--palette-deep-rust);
+  --code-bg: var(--palette-sand);
+  --highlight-bg: #FFE8D1;
+  --shadow: rgba(139, 126, 116, 0.15);
 }
 
 [data-theme="dark"] {
-  --bg-color: #0d1117;
-  --text-color: #e6edf3;
-  --text-muted: #8b949e;
-  --border-color: #30363d;
-  --card-bg: #161b22;
-  --accent-color: #58a6ff;
-  --accent-hover: #4493f8;
-  --code-bg: #161b22;
-  --highlight-bg: #3c2e00;
-  --shadow: rgba(0, 0, 0, 0.3);
+  /* Dark theme - vintage coastal night palette */
+  --bg-color: #2A3439;
+  --text-color: var(--palette-shell);
+  --text-muted: var(--palette-driftwood);
+  --border-color: #3D4A52;
+  --card-bg: #333F46;
+  --accent-color: var(--palette-coral);
+  --accent-hover: var(--palette-rust);
+  --code-bg: #2E3A41;
+  --highlight-bg: #4A3829;
+  --shadow: rgba(0, 0, 0, 0.4);
 }
 
 /* Apply dark mode variables */

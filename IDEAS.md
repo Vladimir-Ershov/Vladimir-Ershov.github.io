@@ -138,3 +138,7 @@
   - jekyll-youtube      # Video embeds
   - jekyll-pdf-embed    # PDF viewers
   - jekyll-analytics    # Enhanced analytics
+
+
+# Style
+
