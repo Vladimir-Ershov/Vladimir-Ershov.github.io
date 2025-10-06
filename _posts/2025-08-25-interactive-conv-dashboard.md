@@ -2,7 +2,7 @@
 layout: post
 title: "Interactive Convolution Dashboard"
 date: 2025-08-25
-categories: computer-vision deep-learning
+categories: [machine-learning, computer-vision]
 author: Vladimir Ershov
 description: "Interactive dashboard for visualizing how image convolutions work with different kernels"
 ---

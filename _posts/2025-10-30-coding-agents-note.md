@@ -2,7 +2,7 @@
 layout: post
 title: "Schema-Guided Reasoning for AI Coding Agents"
 date: 2025-10-30
-categories: AI LLM coding
+categories: [llm-coding]
 author: Vladimir Ershov
 description: "Exploring structured approaches to building more capable AI coding assistants using schema-guided reasoning patterns"
 tags: [AI, LLM, coding, agents, pydantic, schema]
@@ -60,9 +60,3 @@ SGD: https://abdullin.com/schema-guided-reasoning/patterns
   class RiskAssessment(BaseModel):
       factors: Annotated[List[RiskFactor], MinLen(2), MaxLen(4)]
   ```
-
-# Claude code
-
-Plan Mode: Shift+Tab+Tab to activate
-Use the word "think" in prompts to activate extended thinking mode
-

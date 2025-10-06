@@ -2,7 +2,7 @@
 layout: post
 title: "Notes on PyTorch"
 date: 2025-09-24
-categories: ml
+categories: [machine-learning, pytorch, WIP]
 author: Vladimir Ershov
 description: "TBD"
 ---
@@ -52,3 +52,6 @@ R-CNN or Faster R-CNN break the problem into two separate steps:
 First stage: Generate region proposals - essentially asking "where might objects be?" This creates a bunch of candidate bounding boxes that might contain objects.
 Second stage: For each proposed region, classify what's in it and refine the bounding box coordinates.
 
+<div class="todo-block">
+<p><strong>TODO:</strong> </p>
+</div>

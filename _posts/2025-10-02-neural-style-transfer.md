@@ -2,7 +2,7 @@
 layout: post
 title: "Neural Style Transfer: From Classic to Modern Approaches (2025)"
 date: 2025-10-02
-categories: [machine-learning, computer-vision, deep-learning]
+categories: [machine-learning, computer-vision]
 tags: [ai-generated, pytorch, style-transfer, neural-networks, AdaIN, diffusion-models]
 ---
 
@@ -216,6 +216,10 @@ gram[i,j] = correlation between channel i and channel j
 
 This encodes texture patterns (like "swirly brushstrokes + blue colors") while discarding spatial layout. It's why we can transfer artistic style without copying content structure.
 
+<div class="todo-block">
+<p><strong>TODO:</strong> </p>
+
+
 <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
 <strong>Interactive Demo:</strong> Try adjusting the style weight below to see how it affects the balance between content and style.
 
@@ -229,6 +233,7 @@ function updateWeight(value) {
     // In practice, this would trigger re-optimization
 }
 </script>
+</div>
 </div>
 
 ---
@@ -425,7 +430,9 @@ Start with my classic implementation - it teaches the fundamentals of:
 
 All implementations available at: [github.com/Vladimir-Ershov/ml-recap](https://github.com/Vladimir-Ershov)
 
-Try the interactive Colab notebook: [Open in Colab](#)
+<div class="todo-block">
+<p><strong>TODO:</strong>  interactive Colab notebook: <a href="#">Open in Colab</a></p>
+</div>
 
 ---
 
@@ -441,8 +448,6 @@ Try the interactive Colab notebook: [Open in Colab](#)
 ## Conclusion
 
 Neural style transfer has evolved from a slow optimization process to real-time, high-quality artistic transformation. While my classic implementation provides excellent learning value, modern approaches like AdaIN and Stable Diffusion offer practical advantages for real applications.
-
-**Next Steps**: In my next post, I'll implement AdaIN from scratch and compare results quantitatively using perceptual metrics.
 
 ---
 

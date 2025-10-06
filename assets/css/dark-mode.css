@@ -934,3 +934,80 @@ h1.site-title,
     padding: 0.875rem;
   }
 }
+
+/* ============================================
+   TODO / Under Construction Block
+   ============================================ */
+
+.todo-block {
+  position: relative;
+  margin: 32px 0;
+  padding: 20px 24px;
+  padding-left: 32px;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow);
+  overflow: hidden;
+}
+
+/* Black and yellow construction stripes on the left */
+.todo-block::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background: repeating-linear-gradient(
+    45deg,
+    #000,
+    #000 10px,
+    #FFD700 10px,
+    #FFD700 20px
+  );
+}
+
+/* Construction icon on the right */
+.todo-block::after {
+  content: '🚧';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.todo-block p {
+  margin: 0;
+  color: var(--text-color);
+  font-style: italic;
+}
+
+.todo-block strong,
+.todo-block b {
+  color: #FFD700;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .todo-block {
+  background-color: rgba(255, 215, 0, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .todo-block {
+    padding: 16px 20px;
+    padding-left: 28px;
+  }
+
+  .todo-block::after {
+    font-size: 2rem;
+    right: 15px;
+  }
+}

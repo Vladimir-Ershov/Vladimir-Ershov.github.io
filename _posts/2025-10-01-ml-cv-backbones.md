@@ -2,7 +2,7 @@
 layout: post
 title: "Training ML Models in Computer Vision (2025)"
 date: 2025-10-01
-categories: [machine-learning, computer-vision, deep-learning]
+categories: [machine-learning, computer-vision]
 tags: [ai-generated, pytorch, tensorflow, yolo, huggingface, ml-training]
 ---
 
