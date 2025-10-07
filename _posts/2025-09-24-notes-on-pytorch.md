@@ -53,5 +53,10 @@ First stage: Generate region proposals - essentially asking "where might objects
 Second stage: For each proposed region, classify what's in it and refine the bounding box coordinates.
 
 <div class="todo-block">
-<p><strong>TODO:</strong> </p>
+<p><strong>TODO:</strong> 
+Here are some resources for practicing tensor operations: Interactive Sites:
+einops.rocks - Visual, interactive tensor operation (supports PyTorch syntax) https://einops.rocks/
+Tensor Puzzles by Sasha Rush - Coding challenges specifically for practicing reshape, gather, etc. - https://github.com/srush/Tensor-Puzzles
+PyTorch Tutorials - Tensor Operations - Official interactive notebooks  https://docs.pytorch.org/tutorials/beginner/basics/tensorqs_tutorial.html
+</p>
 </div>
