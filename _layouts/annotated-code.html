@@ -1,0 +1,465 @@
+---
+layout: default
+---
+
+<div class="annotated-code-wrapper">
+  <!-- Header Section -->
+  <div class="ac-header">
+    <h1 class="ac-title">{{ page.title | escape }}</h1>
+    <div class="ac-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+    </div>
+    {% if page.description %}
+      <div class="ac-description">{{ page.description }}</div>
+    {% endif %}
+  </div>
+
+  <!-- Introduction (full width, above columns) -->
+  {% if page.intro %}
+  <div class="ac-intro">
+    {{ page.intro | markdownify }}
+  </div>
+  {% endif %}
+
+  <!-- Two Column Layout -->
+  <div class="ac-two-column">
+    <!-- Left: Code Column -->
+    <div class="ac-code-column">
+      {{ content }}
+    </div>
+
+    <!-- Right: Annotation Column -->
+    <div class="ac-annotation-column">
+      <svg class="ac-connector-svg"></svg>
+      <!-- Annotations populated by JS -->
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Reset wrapper constraints from minima theme */
+  body:has(.annotated-code-wrapper) .page-content .wrapper {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Main wrapper */
+  .annotated-code-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Header styling */
+  .ac-header {
+    max-width: 1400px;
+    margin: 2rem auto 2rem;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .ac-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .ac-meta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .ac-description {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Intro section - full width, centered, above columns */
+  .ac-intro {
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 8px;
+    line-height: 1.8;
+  }
+
+  /* Two column layout */
+  .ac-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2rem;
+    align-items: start;
+  }
+
+  /* Code column (left) */
+  .ac-code-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* Annotation column (right) - positioned container */
+  .ac-annotation-column {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* SVG for connector lines */
+  .ac-connector-svg {
+    position: absolute;
+    top: 0;
+    left: -3rem;
+    width: 3rem;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .ac-connector-line {
+    stroke: var(--accent-color);
+    stroke-width: 2;
+    fill: none;
+    opacity: 0.4;
+  }
+
+  .ac-connector-line.focused {
+    stroke-width: 3;
+    opacity: 0.8;
+  }
+
+  /* Code blocks */
+  .code-block {
+    background-color: var(--code-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+  }
+
+  .code-block.ac-focused {
+    opacity: 1;
+    border-color: var(--accent-color);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: scale(1.01);
+  }
+
+  .code-block pre {
+    margin: 0;
+    background: transparent;
+    padding: 0;
+  }
+
+  .code-block code {
+    background: transparent;
+    padding: 0;
+    color: var(--text-color);
+  }
+
+  /* Annotation blocks - absolutely positioned */
+  .annotation-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    line-height: 1.8;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    max-height: 4rem;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .annotation-block.ac-visible {
+    opacity: 0.6;
+    visibility: visible;
+    max-height: none;
+  }
+
+  .annotation-block.ac-focused {
+    opacity: 1;
+    visibility: visible;
+    max-height: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-left-width: 6px;
+    cursor: default;
+  }
+
+  .annotation-block h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+  }
+
+  .annotation-block p {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .annotation-block p:last-child {
+    margin-bottom: 0;
+  }
+
+  .annotation-block code {
+    background-color: var(--code-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.85em;
+    color: var(--accent-color);
+  }
+
+  /* Responsive design */
+  @media (max-width: 1024px) {
+    .ac-two-column {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .ac-annotation-column {
+      position: static;
+    }
+
+    .annotation-block {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      max-height: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .code-block {
+      opacity: 1;
+    }
+
+    .ac-connector-svg {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .ac-title {
+      font-size: 2rem;
+    }
+
+    .ac-two-column {
+      padding: 1rem;
+    }
+
+    .code-block, .annotation-block {
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const codeBlocks = document.querySelectorAll('.code-block');
+  const annotationColumn = document.querySelector('.ac-annotation-column');
+  const svg = document.querySelector('.ac-connector-svg');
+  let currentFocusedIndex = 0;
+
+  // Wait for annotations to be populated by the inline script in the markdown
+  setTimeout(function() {
+    const annotationBlocks = document.querySelectorAll('.annotation-block');
+    if (annotationBlocks.length === 0) return;
+
+    // Initialize: show first 3 annotations
+    updateDisplay(0, annotationBlocks);
+
+    // Track scroll to update focused block
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(function() {
+        updateFocusOnScroll(annotationBlocks);
+      }, 50); // Reduced timeout for more responsive updates
+    }, { passive: true });
+
+    // Update on resize
+    window.addEventListener('resize', function() {
+      if (currentFocusedIndex >= 0) {
+        updateDisplay(currentFocusedIndex, annotationBlocks);
+      }
+    });
+
+    // Click annotation to scroll to its code
+    annotationBlocks.forEach(function(block, index) {
+      block.addEventListener('click', function() {
+        if (block.classList.contains('ac-focused')) return;
+        codeBlocks[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+  }, 200);
+
+  function updateFocusOnScroll(annotationBlocks) {
+    // Find which code block is closest to viewport center
+    const viewportCenter = window.innerHeight / 2;
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    codeBlocks.forEach(function(block, index) {
+      const rect = block.getBoundingClientRect();
+      const blockCenter = rect.top + rect.height / 2;
+      const distance = Math.abs(blockCenter - viewportCenter);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    if (closestIndex !== currentFocusedIndex) {
+      currentFocusedIndex = closestIndex;
+      updateDisplay(closestIndex, annotationBlocks);
+    }
+  }
+
+  function updateDisplay(focusedIndex, annotationBlocks) {
+    // Clear all states and hide all annotations
+    codeBlocks.forEach(function(block) {
+      block.classList.remove('ac-focused');
+    });
+    annotationBlocks.forEach(function(block) {
+      block.classList.remove('ac-focused', 'ac-visible');
+      block.style.visibility = 'hidden';
+      block.style.opacity = '0';
+    });
+
+    // Set focused code block
+    if (!codeBlocks[focusedIndex]) return;
+    codeBlocks[focusedIndex].classList.add('ac-focused');
+
+    // Get positions in page coordinates
+    const focusedCodeRect = codeBlocks[focusedIndex].getBoundingClientRect();
+    const columnRect = annotationColumn.getBoundingClientRect();
+
+    // Calculate centers in viewport coordinates, then convert to column-relative
+    const focusedCodeCenterViewport = focusedCodeRect.top + focusedCodeRect.height / 2;
+    const columnTopViewport = columnRect.top;
+
+    // Position relative to annotation column
+    const focusedCodeCenterRelative = focusedCodeCenterViewport - columnTopViewport;
+
+    // Position and show 3 annotations
+    const indicesToShow = [focusedIndex - 1, focusedIndex, focusedIndex + 1];
+
+    // First pass: show and measure to get heights
+    const heights = [];
+    indicesToShow.forEach(function(idx) {
+      if (idx >= 0 && idx < annotationBlocks.length) {
+        const block = annotationBlocks[idx];
+        block.style.visibility = 'visible';
+        block.style.maxHeight = 'none';
+        block.style.opacity = '0'; // Keep invisible while measuring
+        heights.push(block.offsetHeight);
+      } else {
+        heights.push(0);
+      }
+    });
+
+    // Calculate total height with gaps
+    const gap = 16;
+    let totalHeight = heights.reduce((sum, h) => sum + h, 0) + gap * (heights.filter(h => h > 0).length - 1);
+
+    // Start position (center the group around focused code block center)
+    // We want the center of the annotation group to align with focusedCodeCenterRelative
+    let currentY = focusedCodeCenterRelative - totalHeight / 2;
+
+    // Second pass: position and show
+    indicesToShow.forEach(function(idx, i) {
+      if (idx >= 0 && idx < annotationBlocks.length && heights[i] > 0) {
+        const block = annotationBlocks[idx];
+        block.style.top = currentY + 'px';
+        block.style.opacity = '1';
+
+        if (idx === focusedIndex) {
+          block.classList.add('ac-focused');
+        } else {
+          block.classList.add('ac-visible');
+        }
+
+        currentY += heights[i] + gap;
+      }
+    });
+
+    // Draw connector lines after layout is complete
+    // Use double requestAnimationFrame to ensure layout is fully done
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        drawConnectors(focusedIndex, annotationBlocks);
+      });
+    });
+  }
+
+  function drawConnectors(focusedIndex, annotationBlocks) {
+    if (!svg) return;
+    svg.innerHTML = '';
+
+    // Set SVG height to match the code column height
+    const codeColumn = document.querySelector('.ac-code-column');
+    const columnHeight = codeColumn ? codeColumn.scrollHeight : annotationColumn.scrollHeight;
+    svg.setAttribute('height', columnHeight);
+
+    const svgRect = svg.getBoundingClientRect();
+
+    // Draw curved lines for the 3 visible annotations
+    const indicesToConnect = [focusedIndex - 1, focusedIndex, focusedIndex + 1];
+
+    indicesToConnect.forEach(function(idx) {
+      if (idx < 0 || idx >= codeBlocks.length) return;
+      if (!codeBlocks[idx] || !annotationBlocks[idx]) return;
+
+      // Only draw if annotation is actually visible
+      const annBlock = annotationBlocks[idx];
+      if (!annBlock.classList.contains('ac-visible') && !annBlock.classList.contains('ac-focused')) return;
+      if (annBlock.style.visibility === 'hidden' || annBlock.style.opacity === '0') return;
+
+      const codeRect = codeBlocks[idx].getBoundingClientRect();
+      const annotationRect = annBlock.getBoundingClientRect();
+
+      // Calculate center positions relative to SVG
+      const x1 = 0; // Start at left edge of SVG (right edge of code column)
+      const y1 = codeRect.top + codeRect.height / 2 - svgRect.top;
+      const x2 = svgRect.width; // End at right edge of SVG (left edge of annotation column)
+      const y2 = annotationRect.top + annotationRect.height / 2 - svgRect.top;
+
+      // Create smooth S-curve using cubic bezier
+      // Control points are offset horizontally to create nice curve
+      const cx1 = svgRect.width * 0.3; // First control point 30% across
+      const cy1 = y1; // Keep at same height as start
+      const cx2 = svgRect.width * 0.7; // Second control point 70% across
+      const cy2 = y2; // Keep at same height as end
+
+      const isFocused = idx === focusedIndex;
+      const lineClass = 'ac-connector-line' + (isFocused ? ' focused' : '');
+
+      // Create smooth curved path using cubic bezier
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const d = `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`;
+      path.setAttribute('d', d);
+      path.setAttribute('class', lineClass);
+
+      svg.appendChild(path);
+    });
+  }
+});
+</script>
