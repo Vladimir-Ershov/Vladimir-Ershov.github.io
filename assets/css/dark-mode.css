@@ -270,14 +270,14 @@ h1.site-title,
 /* In dark mode the body text becomes light, which makes code blocks
    (which keep their light syntax-highlighting background) unreadable.
    Force code to use a dark base color so it stays legible on light backgrounds. */
-[data-theme="dark"] .post-content pre,
-[data-theme="dark"] .post-content pre code,
-[data-theme="dark"] .post-content .highlight,
-[data-theme="dark"] .post-content pre .highlight * {
+[data-theme="dark"] pre,
+[data-theme="dark"] pre code,
+[data-theme="dark"] .highlight,
+[data-theme="dark"] pre .highlight * {
   color: #24292e !important;
 }
 
-[data-theme="dark"] .post-content code {
+[data-theme="dark"] code {
   color: #24292e !important;
 }
 
