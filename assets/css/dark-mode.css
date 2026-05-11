@@ -267,6 +267,20 @@ h1.site-title,
   color: inherit;
 }
 
+/* In dark mode the body text becomes light, which makes code blocks
+   (which keep their light syntax-highlighting background) unreadable.
+   Force code to use a dark base color so it stays legible on light backgrounds. */
+[data-theme="dark"] .post-content pre,
+[data-theme="dark"] .post-content pre code,
+[data-theme="dark"] .post-content .highlight,
+[data-theme="dark"] .post-content pre .highlight * {
+  color: #24292e !important;
+}
+
+[data-theme="dark"] .post-content code {
+  color: #24292e !important;
+}
+
 .post-content blockquote {
   border-left-color: var(--accent-color);
   color: var(--text-muted);
@@ -537,11 +551,17 @@ h1.site-title,
 
 /* Minima theme specific overrides */
 .wrapper {
-  max-width: calc(800px - (30px * 2));
+  max-width: 1400px;
   margin-right: auto;
   margin-left: auto;
   padding-right: 30px;
   padding-left: 30px;
+}
+
+@media (min-width: 769px) {
+  .wrapper {
+    width: 80%;
+  }
 }
 
 /* Mobile responsiveness for header and dark mode toggle */
